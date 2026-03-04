@@ -7,7 +7,7 @@ import subprocess
 os.makedirs("../data", exist_ok=True)
 
 # Pull MLB batting stats
-df = batting_stats(2024, qual=0)
+df = batting_stats(2025, qual=0)
 
 # Save CSV
 csv_path = "../data/batting_stats.csv"
