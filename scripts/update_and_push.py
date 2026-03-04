@@ -1,5 +1,5 @@
 import os
-from pybaseball import batting_stats
+from pybaseball import batting_stats, pitching_stats
 import pandas as pd
 import subprocess
 
@@ -10,10 +10,17 @@ os.makedirs(data_folder, exist_ok=True)
 
 # ---------- 2️⃣ Pull MLB batting stats ----------
 print("Pulling MLB batting stats...")
-df = batting_stats(2021, 2025, qual=0)  # qual=0 gets all batters
+batting_df = batting_stats(2021, 2025, qual=0)  # qual=0 gets all batters
 csv_path = os.path.join(data_folder, "batting_stats.csv")
-df.to_csv(csv_path, index=False)
+batting_df.to_csv(csv_path, index=False)
 print(f"Saved batting stats to {csv_path}")
+
+# ---------- 2️⃣ Pull MLB pitching stats ----------
+print("Pulling MLB pitching stats...")
+pitching_df = pitching_stats(2021, 2025, qual=0)  # qual=0 gets all pitchers
+csv_path = os.path.join(data_folder, "pitching_stats.csv")
+pitching_df.to_csv(csv_path, index=False)
+print(f"Saved pitching stats to {csv_path}")
 
 # ---------- 3️⃣ Stage and commit ----------
 print("Staging changes...")
