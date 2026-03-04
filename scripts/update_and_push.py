@@ -10,7 +10,7 @@ os.makedirs(data_folder, exist_ok=True)
 
 # ---------- 2️⃣ Pull MLB batting stats ----------
 print("Pulling MLB batting stats...")
-df = batting_stats(2025, qual=0)  # qual=0 gets all batters
+df = batting_stats(2021, 2025, qual=0)  # qual=0 gets all batters
 csv_path = os.path.join(data_folder, "batting_stats.csv")
 df.to_csv(csv_path, index=False)
 print(f"Saved batting stats to {csv_path}")
