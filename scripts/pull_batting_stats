@@ -1,0 +1,9 @@
+from pybaseball import batting_stats
+
+# Pull MLB batting stats for a season
+df = batting_stats(2025)
+
+# Save the raw data
+df.to_csv("../data/batting_stats.csv", index=False)
+
+print("Batting stats saved.")
