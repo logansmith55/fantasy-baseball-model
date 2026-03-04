@@ -3,23 +3,28 @@ from pybaseball import batting_stats
 import pandas as pd
 import subprocess
 
-# Make sure data folder exists
-os.makedirs("../data", exist_ok=True)
+# ---------- 1️⃣ Ensure folders exist ----------
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+data_folder = os.path.join(repo_root, "data")
+os.makedirs(data_folder, exist_ok=True)
 
-# Pull MLB batting stats
-df = batting_stats(2025, qual=0)
-
-# Save CSV
-csv_path = "../data/batting_stats.csv"
+# ---------- 2️⃣ Pull MLB batting stats ----------
+print("Pulling MLB batting stats...")
+df = batting_stats(2025, qual=0)  # qual=0 gets all batters
+csv_path = os.path.join(data_folder, "batting_stats.csv")
 df.to_csv(csv_path, index=False)
-print("Batting stats saved!")
+print(f"Saved batting stats to {csv_path}")
 
-# Stage all changes
-subprocess.run(["git", "add", "."], check=False)
+# ---------- 3️⃣ Stage and commit ----------
+print("Staging changes...")
+subprocess.run(["git", "add", "."], cwd=repo_root)
 
-# Commit changes
-subprocess.run(["git", "commit", "-m", "update batting stats CSV"], check=False)
+print("Committing changes...")
+# The commit may fail if there are no changes, so we ignore errors
+subprocess.run(["git", "commit", "-m", "Update batting stats CSV"], cwd=repo_root, check=False)
 
-# Push to GitHub
-subprocess.run(["git", "push", "origin", "main"], check=False)
-print("Changes pushed to GitHub!")
+# ---------- 4️⃣ Push to GitHub ----------
+print("Pushing to GitHub...")
+subprocess.run(["git", "push", "origin", "main"], cwd=repo_root, check=False)
+
+print("All done! Your CSV and scripts are updated on GitHub.")
