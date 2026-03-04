@@ -1,7 +1,7 @@
 from pybaseball import batting_stats
 
 # Pull MLB batting stats for a season
-df = batting_stats(2025)
+df = batting_stats(2025, qual=0)  # qual=0 means no minimum plate appearances
 
 # Save the raw data
 df.to_csv("../data/batting_stats.csv", index=False)
